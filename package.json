@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/daisuke0715/learning-typescript/issues"
   },
-  "homepage": "https://github.com/daisuke0715/learning-typescript#readme"
+  "homepage": "https://github.com/daisuke0715/learning-typescript#readme",
+  "dependencies": {
+    "typescript": "^4.5.5"
+  }
 }
