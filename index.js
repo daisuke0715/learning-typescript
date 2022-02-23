@@ -1,3 +1,4 @@
-var output = function (text) { };
-var testMessage = 'HelloWorld';
+"use strict";
+const output = (text) => { };
+const testMessage = 1;
 console.log(output(testMessage));
