@@ -1,10 +1,10 @@
 class ObjectWrapper {
-  private _obj: Object;
+  private _obj: object;
 
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
-  constructor(_obj: Object) {
+  constructor(_obj: object) {
     this._obj = _obj
   }
 
@@ -12,7 +12,7 @@ class ObjectWrapper {
    * this._objのコピーを返却
    * @return Object
    */
-  get obj(): Object {
+  public get obj(): object {
     return this._obj
   }
 
@@ -21,7 +21,7 @@ class ObjectWrapper {
    * @param key オブジェクトのキー
    * @param val オブジェクトの値
    */
-  set(key: string, val: string): boolean {
+  public set(key: string, val: string): boolean {
     return key in this._obj ? true : false
   }
 
@@ -30,12 +30,14 @@ class ObjectWrapper {
    * 指定のキーが存在しない場合 undefinedを返却
    * @param key オブジェクトのキー
    */
-  get(key) {}
+  public get(key: string): string | undefined {
+    return key in this._obj ? this._obj.key : undefined
+  }
 
   /**
    * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
    */
-  findKeys(val: unknown) {}
+  public findKeys(val: unknown) {}
 }
 
 /**
