@@ -12,7 +12,9 @@ class ObjectWrapper {
    * this._objのコピーを返却
    * @return Object
    */
-  get obj() {}
+  get obj(): Object {
+    return this._obj
+  }
 
   /**
    * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却
