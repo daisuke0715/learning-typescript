@@ -21,7 +21,9 @@ class ObjectWrapper {
    * @param key オブジェクトのキー
    * @param val オブジェクトの値
    */
-  set(key, val): boolean {}
+  set(key: string, val: string): boolean {
+    return key in this._obj ? true : false
+  }
 
   /**
    * 指定したキーの値のコピーを返却
