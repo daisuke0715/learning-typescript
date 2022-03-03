@@ -1,10 +1,12 @@
 class ObjectWrapper {
-  private _obj;
+  private _obj: Object;
 
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
-  constructor(_obj: Object) {}
+  constructor(_obj: Object) {
+    this._obj = _obj
+  }
 
   /**
    * this._objのコピーを返却
