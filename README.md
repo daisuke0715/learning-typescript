@@ -80,3 +80,4 @@
   ```
   [参考資料：TypeScriptの型と基本的な書き方#連想配列の宣言](https://qiita.com/Rock22/items/d7ae96464bdbf297c6ec#%E9%80%A3%E6%83%B3%E9%85%8D%E5%88%97%E3%81%AE%E5%AE%A3%E8%A8%80)
   [参考資料：TypeScriptの型: 辞書型を定義する (Dictionary)](https://maku.blog/p/x3ocp9a/)
+  
