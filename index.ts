@@ -19,7 +19,8 @@ class ObjectWrapper<T> {
   }
 
   /**
-   * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却（MEMO: genericsによりコンパイルエラーになるので、falseを返却する必要がない？）
+   * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却
+   * （MEMO: genericsによりkeyがthis._objに存在しない場合、コンパイルエラーになるので、falseを返却する必要がない？）
    * @param key オブジェクトのキー
    * @param val オブジェクトの値
    */
