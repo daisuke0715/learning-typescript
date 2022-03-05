@@ -1,33 +1,31 @@
-class ObjectWrapper {
-  private _obj: {[key: string]: string};
+class ObjectWrapper<T> {
+  private _obj: T;
 
   /***
    * 引数のオブジェクトのコピーを this._objに設定
    */
-  constructor(_obj: {[key: string]: string}) {
-    this._obj = _obj
+  constructor(_obj: T) {
+    const obj = _obj
+    this._obj = obj
   }
 
   /**
    * this._objのコピーを返却
    * @return Object
    */
-  public get obj(): {[key: string]: string} {
-    return this._obj
+  public get obj(): T {
+    const obj = this._obj
+    return obj
   }
 
   /**
-   * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却
+   * this._obj[key] に valを設定。keyがthis._objに存在しない場合、falseを返却（MEMO: genericsによりコンパイルエラーになるので、falseを返却する必要がない？）
    * @param key オブジェクトのキー
    * @param val オブジェクトの値
    */
-  public set(key: string, val: string): boolean {
-    if (this._obj[key] != undefined) {
-      this._obj[key] = val
-      return true
-    } else {
-      return false
-    }
+  public set(key: keyof T, val: T[keyof T]): boolean {
+    this._obj[key] = val
+    return true
   }
 
   /**
@@ -35,21 +33,26 @@ class ObjectWrapper {
    * 指定のキーが存在しない場合 undefinedを返却
    * @param key オブジェクトのキー
    */
-  public get(key: string): string | undefined {
-    return key in this._obj ? this._obj[key] : undefined
+  public get(key: keyof T): T[keyof T] | undefined {
+    if (key in this._obj) {
+      const obj = this._obj[key]
+      return obj
+    } else {
+      return undefined
+    }
   }
 
   /**
    * 指定した値を持つkeyの配列を返却。該当のものがなければ空の配列を返却。
    */
-  findKeys(val: string): string[] {
-    const result: string[] = []
+  findKeys(val: T[keyof T]): (keyof T)[] {
+    const hasKeyArray: (keyof T)[] = []
     for (let key in this._obj) {
       if (this._obj[key] === val) {
-        result.push(key)
+        hasKeyArray.push(key)
       }
     }
-    return result
+    return hasKeyArray
   }
 }
 
@@ -67,8 +70,8 @@ if (wrappedObj1.obj.a === '01') {
 }
 
 if (
-  wrappedObj1.set('c', '03') === false &&
-  wrappedObj1.set('b', '04') === true &&
+  // wrappedObj1.set('c', '03') === false && (MEMO: 型安全にした結果コンパイルエラー)
+  wrappedObj1.set('b', '04') === true && 
   wrappedObj1.obj.b === '04'
 ) {
   console.log('OK: set(key, val)');
@@ -76,7 +79,7 @@ if (
   console.error('NG: set(key, val)');
 }
 
-if (wrappedObj1.get('b') === '04' && wrappedObj1.get('c') === undefined) {
+if (wrappedObj1.get('b') === '04') { // && wrappedObj1.get('c') === undefined) {  (MEMO: 型安全にした結果コンパイルエラー)
   console.log('OK: get(key)');
 } else {
   console.error('NG: get(key)');
