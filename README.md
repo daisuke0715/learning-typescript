@@ -73,5 +73,38 @@
 <br>
 
 - objectのkeyのデータを取得する方法
-  - keyof演算子で取得できる
+  - keyof演算子で取得できる  
     [参考資料：keyofを使ってオブジェクトと適切なキーを取る関数作成](https://negalog.com/typescript-keyof-generics/)
+
+
+<br>
+
+- オブジェクトのコピーについて
+  - Object.assign() を使う方法ですね。元々この関数は、一番最初に渡されたオブジェクトに、その後ろに渡されたオブジェクトを結合していく関数です。
+  - ポイントは、今回は新しく作った空オブジェクト {} にtest を結合しているので、できあがる内容は test と同じものだけど、オブジェクト自体は別物となる点
+  - 同じ値を参照しないようにするためにコピーを別オブジェクトで作成している
+<br>
+<br>
+
+
+  ```
+  # 以下のコードだとダメ（これだと代入で同じものを参照しているから）
+  var test = { a: 10 };
+  var test_copy = test;
+ 
+  test_copy.a = 20;
+ 
+  console.log(test);
+
+
+  // 実行結果
+  [object Object] {
+    a: 20
+  } 
+
+  # コピーを取る方法
+  var test = { a: 10 };
+  var test_copy = Object.assign({}, test);
+
+  ```
+  [参考資料：[JavaScript]オブジェクトのコピーの取り方](https://www.agent-grow.com/self20percent/2019/09/16/javascript-object-and-array-copy-es6/)
