@@ -5,8 +5,7 @@ class ObjectWrapper<T> {
    * 引数のオブジェクトのコピーを this._objに設定
    */
   constructor(_obj: T) {
-    const obj = _obj
-    this._obj = obj
+    this._obj = Object.assign({}, _obj)
   }
 
   /**
@@ -14,8 +13,7 @@ class ObjectWrapper<T> {
    * @return Object
    */
   public get obj(): T {
-    const obj = this._obj
-    return obj
+    return Object.assign({}, this._obj)
   }
 
   /**
@@ -31,16 +29,12 @@ class ObjectWrapper<T> {
 
   /**
    * 指定したキーの値のコピーを返却
-   * 指定のキーが存在しない場合 undefinedを返却
+   * 指定のキーが存在しない場合 undefinedを返却（キーが存在しない場合、MEMO:コンパイルエラーを吐くのでundefinedの設定必要なし）
    * @param key オブジェクトのキー
    */
-  public get(key: keyof T): T[keyof T] | undefined {
-    if (key in this._obj) {
-      const obj = this._obj[key]
-      return obj
-    } else {
-      return undefined
-    }
+  public get(key: keyof T): T[keyof T] {
+    const obj = this._obj[key]
+    return obj
   }
 
   /**
